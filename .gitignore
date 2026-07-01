@@ -1,34 +1,1967 @@
-# Gradle files
-.gradle/
-build/
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
-# Local configuration file (sdk path, etc)
-local.properties
+<head>
 
-# Log/OS Files
-*.log
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+    <b:include data='blog' name='all-head-content'/>
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+    <title><data:blog.pageTitle/></title>
 
-# Keystore files
-*.jks
-*.keystore
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+    <b:skin><![CDATA[
 
-# Android Profiling
-*.hprof
+        /* --- CSS VARIABLES & STYLING --- */
+
+        :root {
+
+            --primary-color: #ff4757;
+
+            --bg-color: #f5f5f5;
+
+            --card-bg: #ffffff;
+
+            --text-dark: #333;
+
+            --text-light: #777;
+
+            --header-bg: #ffffff;
+
+            --border-color: #eee;
+
+            --sidebar-bg: #ffffff;
+
+            --footer-bg: #ffffff;
+
+        }
+
+        /* DARK MODE VARIABLES */
+
+        body.dark-mode {
+
+            --bg-color: #121212;
+
+            --card-bg: #1e1e1e;
+
+            --text-dark: #e0e0e0;
+
+            --text-light: #aaa;
+
+            --header-bg: #1e1e1e;
+
+            --border-color: #333;
+
+            --sidebar-bg: #1e1e1e;
+
+            --footer-bg: #1e1e1e;
+
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; transition: background 0.3s, color 0.3s; }
+
+        body { background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Header */
+
+        header {
+
+            background: var(--header-bg);
+
+            padding: 15px 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+        }
+
+        .menu-icon { font-size: 24px; cursor: pointer; color: var(--text-dark); }
+
+        
+
+        /* HEADER LOGO WITH GRADIENT (Purple to Pink) */
+
+        .logo-text, .logo-text a, .header-inner h1 a { 
+
+            font-size: 24px !important; 
+
+            font-weight: 800 !important; 
+
+            background: linear-gradient(to right, #9B4F96, #FF4B5C) !important;
+
+            -webkit-background-clip: text !important;
+
+            -webkit-text-fill-color: transparent !important;
+
+            background-clip: text !important;
+
+            letter-spacing: 1px; 
+
+            text-decoration: none !important;
+
+        }
+
+        
+
+        .header-icons {
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+        .header-icons span {
+
+            margin-left: 15px;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            color: var(--text-dark);
+
+            user-select: none;
+
+        }
+
+        /* Search Bar Overlay */
+
+        #search-container {
+
+            display: none;
+
+            background: var(--header-bg);
+
+            padding: 10px 20px;
+
+            border-bottom: 1px solid var(--border-color);
+
+            animation: slideDown 0.3s ease;
+
+        }
+
+        #search-input {
+
+            width: 100%;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            border: 1px solid var(--border-color);
+
+            background: var(--bg-color);
+
+            color: var(--text-dark);
+
+            outline: none;
+
+        }
+
+        @keyframes slideDown { from {transform: translateY(-20px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+
+        /* Sidebar Menu */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: -280px;
+
+            width: 280px;
+
+            height: 100%;
+
+            background: var(--sidebar-bg);
+
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+
+            z-index: 2000;
+
+            transition: left 0.3s ease;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+        }
+
+        .sidebar.active { left: 0; }
+
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+
+        .close-btn { font-size: 24px; cursor: pointer; color: var(--text-dark); }
+
+        
+
+        /* Blogger LinkList Styling */
+
+        .sidebar .widget-content ul { list-style: none; padding: 0; }
+
+        .sidebar .widget-content li { padding: 0; }
+
+        .sidebar .widget-content li a {
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid var(--border-color);
+
+            color: var(--text-dark);
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+            display: block;
+
+        }
+
+        .sidebar .widget-content li a:hover { color: var(--primary-color); }
+
+        
+
+        .overlay {
+
+            position: fixed;
+
+            top: 0; left: 0; width: 100%; height: 100%;
+
+            background: rgba(0,0,0,0.5);
+
+            z-index: 1500;
+
+            display: none;
+
+        }
+
+        .overlay.active { display: block; }
+
+        /* Main Container */
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; min-height: 60vh; }
+
+        .section-title {
+
+            font-size: 14px; font-weight: 700; color: var(--text-dark);
+
+            text-transform: uppercase; border-bottom: 2px solid var(--primary-color);
+
+            display: inline-block; margin-bottom: 15px; padding-bottom: 5px;
+
+        }
+
+        /* Grid */
+
+        .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+
+        .app-card {
+
+            background: var(--card-bg); border-radius: 12px; padding: 15px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative;
+
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+
+        }
+
+        .app-card:hover { transform: translateY(-3px); }
+
+        
+
+        /* Post Thumbnails */
+
+        .app-icon-img {
+
+            width: 70px; height: 70px; border-radius: 15px; margin-bottom: 10px;
+
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+
+            cursor: pointer;
+
+        }
+
+        .app-icon-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .icon-placeholder { background: #4fabff; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white;}
+
+        .app-title { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; height: 38px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+
+        .app-meta { font-size: 10px; color: var(--primary-color); font-weight: 500; }
+
+        .app-date { font-size: 10px; color: var(--text-light); }
+
+        /* DOWNLOAD BUTTON STYLE - FIXED */
+
+        .app-download-btn {
+
+            display: block;
+
+            margin-top: 10px;
+
+            padding: 8px 0;
+
+            background: var(--primary-color);
+
+            color: white !important;
+
+            text-align: center;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            width: 100%;
+
+            cursor: pointer;
+
+            text-transform: uppercase;
+
+            position: relative;
+
+            z-index: 10;
+
+        }
+
+        .app-download-btn:hover { opacity: 0.9; box-shadow: 0 3px 8px rgba(255, 71, 87, 0.3); }
+
+        /* --- SOCIAL STATS ROW --- */
+
+        .social-stats-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding-top: 8px;
+
+            border-top: 1px solid var(--border-color);
+
+            font-size: 11px;
+
+            color: var(--text-light);
+
+        }
+
+        .stat-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 3px;
+
+            cursor: pointer;
+
+            padding: 5px; /* Bigger tap area */
+
+        }
+
+        .stat-item span { font-weight: 600; }
+
+        .stat-item:hover { color: var(--primary-color); }
+
+        .heart-active { color: #e84393; font-weight:bold; }
+
+        /* LIGHTBOX STYLES */
+
+        #lightbox-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 10000;
+
+            padding: 20px;
+
+            left: 0;
+
+            top: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.9);
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-direction: column;
+
+        }
+
+        #lightbox-img {
+
+            max-width: 90%;
+
+            max-height: 80vh;
+
+            border-radius: 8px;
+
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+
+            animation: zoomIn 0.3s;
+
+        }
+
+        @keyframes zoomIn { from {transform:scale(0.8); opacity:0;} to {transform:scale(1); opacity:1;} }
+
+        .lightbox-close {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 30px;
+
+            color: #f1f1f1;
+
+            font-size: 40px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+        /* --- COMMENT MODAL (POPUP) STYLES --- */
+
+        #comment-modal-overlay {
+
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 100%;
+
+            background: rgba(0,0,0,0.5); z-index: 9000; display: none;
+
+            align-items: flex-end; /* Slide up from bottom */
+
+        }
+
+        #comment-modal-content {
+
+            background: var(--card-bg);
+
+            width: 100%; max-width: 600px; margin: 0 auto;
+
+            border-radius: 15px 15px 0 0;
+
+            padding: 15px;
+
+            max-height: 80vh;
+
+            display: flex; flex-direction: column;
+
+            animation: slideUp 0.3s ease-out;
+
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+
+        }
+
+        @keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
+
+        
+
+        .cm-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 10px; }
+
+        .cm-title { font-weight: 700; color: var(--text-dark); }
+
+        .cm-close { font-size: 24px; cursor: pointer; color: var(--text-light); }
+
+        
+
+        .cm-list { flex: 1; overflow-y: auto; margin-bottom: 10px; min-height: 200px; }
+
+        .cm-item { display: flex; gap: 10px; margin-bottom: 15px; }
+
+        .cm-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+
+        .cm-box { background: var(--bg-color); padding: 8px 12px; border-radius: 12px; flex: 1; }
+
+        .cm-name { font-size: 11px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+
+        .cm-text { font-size: 13px; color: var(--text-dark); }
+
+        
+
+        .cm-input-area { display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--border-color); padding-top: 10px; }
+
+        .cm-input { flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 20px; background: var(--bg-color); color: var(--text-dark); outline: none; }
+
+        .cm-send { color: var(--primary-color); font-weight: 600; cursor: pointer; padding: 5px 10px; }
+
+        /* Subscribe Box */
+
+        .subscribe-box {
+
+            background: var(--card-bg);
+
+            border-radius: 12px; padding: 30px 20px;
+
+            text-align: center; margin: 40px auto;
+
+            max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+            position: relative; overflow: hidden;
+
+        }
+
+        .subscribe-box::before {
+
+            content: ''; position: absolute; top: -50px; right: -50px;
+
+            width: 100px; height: 100px; background: rgba(255, 71, 87, 0.1);
+
+            border-radius: 50%;
+
+        }
+
+        .bell-icon-circle {
+
+            width: 50px; height: 50px; background: #fff; border-radius: 50%;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin: 0 auto 15px;
+
+            display: flex; align-items: center; justify-content: center;
+
+            font-size: 24px; color: var(--primary-color);
+
+        }
+
+        .sub-title { font-weight: 700; font-size: 18px; margin-bottom: 5px; color: var(--text-dark); }
+
+        .sub-desc { font-size: 12px; color: var(--text-light); margin-bottom: 20px; }
+
+        .sub-input {
+
+            width: 100%; padding: 12px; border: 1px solid var(--border-color);
+
+            border-radius: 6px; background: var(--bg-color); color: var(--text-dark);
+
+            margin-bottom: 15px; outline: none;
+
+        }
+
+        .sub-btn {
+
+            width: 100%; padding: 12px; background: var(--primary-color);
+
+            color: white; border: none; border-radius: 6px; font-weight: 600;
+
+            cursor: pointer; box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+
+        }
+
+        /* Category Cloud (Label Widget) */
+
+        .category-section {
+
+            background: var(--card-bg); padding: 20px;
+
+            margin-bottom: 30px; border-radius: 12px;
+
+        }
+
+        .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+
+        .Label a {
+
+            padding: 5px 12px;
+
+            border: 1px solid #ffcccc;
+
+            color: #d63031; 
+
+            font-size: 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            background: #fff;
+
+            transition: 0.2s;
+
+            display: inline-block;
+
+        }
+
+        body.dark-mode .Label a {
+
+            background: #2d2d2d; border-color: #444; color: #ff6b81;
+
+        }
+
+        .Label a:hover {
+
+            background: var(--primary-color); color: white; border-color: var(--primary-color);
+
+        }
+
+        /* Footer */
+
+        footer {
+
+            background: var(--footer-bg);
+
+            padding: 40px 20px 20px;
+
+            text-align: center;
+
+            margin-top: 40px;
+
+            border-top: 1px solid var(--border-color);
+
+        }
+
+        .footer-logo {
+
+            font-size: 32px; font-weight: 800;
+
+            background: -webkit-linear-gradient(#d63031, #9b59b6);
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            margin-bottom: 10px; display: inline-block;
+
+        }
+
+        .footer-about-title { font-weight: 700; margin-bottom: 10px; color: var(--text-dark); }
+
+        .footer-desc {
+
+            font-size: 12px; color: var(--text-light); max-width: 600px;
+
+            margin: 0 auto 20px; line-height: 1.6;
+
+        }
+
+        .social-icons { margin-bottom: 30px; }
+
+        .social-icon {
+
+            display: inline-flex; width: 35px; height: 35px;
+
+            background: #eee; border-radius: 50%;
+
+            align-items: center; justify-content: center;
+
+            margin: 0 5px; cursor: pointer; font-size: 14px;
+
+            color: #555;
+
+        }
+
+        .social-icon:hover { background: var(--primary-color); color: white; }
+
+        .footer-links {
+
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
+
+            font-size: 13px; font-weight: 600; color: var(--text-dark);
+
+            margin-bottom: 20px;
+
+        }
+
+        .copyright { font-size: 12px; color: var(--text-light); border-top: 1px solid var(--border-color); padding-top: 20px; }
+
+        /* Back to Top */
+
+        #backToTop {
+
+            position: fixed; bottom: 20px; right: 20px;
+
+            width: 45px; height: 45px; background: var(--primary-color);
+
+            color: white; border-radius: 8px; display: flex;
+
+            align-items: center; justify-content: center;
+
+            cursor: pointer; opacity: 0; pointer-events: none;
+
+            transition: 0.3s; z-index: 999; font-size: 20px;
+
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+        }
+
+        #backToTop.show { opacity: 1; pointer-events: auto; }
+
+        
+
+        /* Blogger UI overrides */
+
+        .widget { margin-bottom: 0; }
+
+        .navbar { display: none !important; }
+
+        /* --- LOGIN & PROFILE STYLES --- */
+
+        #auth-trigger-btn {
+
+            background: var(--primary-color); color: white;
+
+            padding: 5px 12px; border-radius: 20px; font-size: 12px;
+
+            font-weight: 600; margin-left: 10px; cursor: pointer;
+
+        }
+
+        #auth-profile-pic {
+
+            width: 35px; height: 35px; border-radius: 50%;
+
+            margin-left: 10px; cursor: pointer; object-fit: cover;
+
+            border: 2px solid var(--primary-color); display: none;
+
+        }
+
+        
+
+        /* Modal for Login */
+
+        .auth-overlay-modal {
+
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+            background: rgba(0,0,0,0.8); z-index: 9999; display: none;
+
+            justify-content: center; align-items: center; overflow-y: auto;
+
+        }
+
+        .auth-overlay-modal.active { display: flex; }
+
+        
+
+        /* Profile Dropdown Menu */
+
+        .profile-menu {
+
+            position: absolute; top: 60px; right: 20px;
+
+            background: var(--card-bg); box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+            border-radius: 8px; width: 200px; display: none; z-index: 2001;
+
+            padding: 10px 0;
+
+        }
+
+        .profile-menu.active { display: block; }
+
+        .profile-menu-item {
+
+            padding: 10px 15px; font-size: 13px; color: var(--text-dark);
+
+            cursor: pointer; border-bottom: 1px solid var(--border-color);
+
+            display: block;
+
+        }
+
+        .profile-menu-item:hover { background: var(--bg-color); color: var(--primary-color); }
+
+        .profile-menu-item:last-child { border: none; }
+
+        /* Integrated Login CSS */
+
+        #auth-module .card { 
+
+            background: #fff; border-radius: 8px; width: 350px; padding: 20px; 
+
+            text-align: center; max-height: 90vh; overflow-y: auto; position: relative;
+
+        }
+
+        #auth-module h1 { color: #1877f2; font-size: 30px; margin-bottom: 20px; }
+
+        #auth-module input, #auth-module select {
+
+            width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; color: #333;
+
+        }
+
+        #auth-module .btn-blue { background: #1877f2; color: white; border: none; width: 100%; padding: 10px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+
+        #auth-module .btn-green { background: #42b72a; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; }
+
+        #auth-module .btn-white { background: #fff; color: #333; border: 1px solid #ccc; padding: 8px; border-radius: 6px; cursor: pointer; margin-top: 5px; font-size: 13px; width: 100%; }
+
+        #auth-module .forgot-link { color: #1877f2; font-size: 12px; cursor: pointer; display: block; margin: 10px 0; }
+
+        #auth-module .divider { border-bottom: 1px solid #ddd; margin: 15px 0; }
+
+        #auth-module #signup-section, #auth-module #update-section { display: none; text-align: left; }
+
+        
+
+        .row-inputs { display: flex; gap: 5px; }
+
+        .gender-row { display: flex; gap: 5px; margin-bottom: 10px; }
+
+        .gender-box { border: 1px solid #ddd; padding: 5px; flex: 1; display: flex; align-items: center; font-size: 12px; border-radius: 4px; color: #333;}
+
+        .gender-box input { width: auto; margin: 0 0 0 5px; }
+
+        #photo-preview { width: 80px; height: 80px; border-radius: 50%; display: block; margin: 0 auto 10px; border: 2px solid #ddd; object-fit: cover;}
+
+    ]]></b:skin>
+
+</head>
+
+<body>
+
+    <div id='lightbox-modal' onclick='closeLightbox()'>
+
+        <span class='lightbox-close'>&#215;</span>
+
+        <img alt='Zoomed' id='lightbox-img' src=''/>
+
+        <div style='color:white; margin-top:10px; font-size:14px;'>Tap outside to close</div>
+
+    </div>
+
+    <div id='comment-modal-overlay' onclick='closeCommentModal(event)'>
+
+        <div id='comment-modal-content' onclick='event.stopPropagation()'>
+
+            <div class='cm-header'>
+
+                <span class='cm-title'>Comments</span>
+
+                <span class='cm-close' onclick='closeCommentModalDirect()'>&#215;</span>
+
+            </div>
+
+            <div class='cm-list' id='cm-list-container'>
+
+                <div style='text-align:center; padding:20px; color:#777;'>Loading comments...</div>
+
+            </div>
+
+            <div class='cm-input-area'>
+
+                <input class='cm-input' id='cm-input-text' placeholder='Write a comment...' type='text'/>
+
+                <div class='cm-send' onclick='sendComment()'>&#10148;</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id='secured-content'>
+
+    <div class='overlay' id='overlay' onclick='toggleMenu()'/>
+
+    
+
+    <div class='sidebar' id='sidebar'>
+
+        <div class='sidebar-header'>
+
+            <span class='logo-text'><data:blog.title/></span>
+
+            <span class='close-btn' onclick='toggleMenu()'>&#215;</span>
+
+        </div>
+
+        <b:section class='sidebar-menu' id='Sidebar-Menu' showaddelement='yes'>
+          <b:widget id='LinkList1' locked='false' title='Menu' type='LinkList' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-1'>Apps</b:widget-setting>
+              <b:widget-setting name='link-1'>/search/label/Apps</b:widget-setting>
+              <b:widget-setting name='text-0'>Home</b:widget-setting>
+              <b:widget-setting name='link-0'>/</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+                  <div class='widget-content'>
+
+                    <ul>
+
+                      <b:loop values='data:links' var='link'>
+
+                        <li><a expr:href='data:link.target'><data:link.name/></a></li>
+
+                      </b:loop>
+
+                    </ul>
+
+                  </div>
+
+                </b:includable>
+          </b:widget>
+          <b:widget id='Header1' locked='false' title='𝙅𝘼𝙉𝙉𝘼𝙏𝙐𝙇 𝙃𝙊𝙎𝙎𝘼𝙄𝙉 (Header)' type='Header' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='displayUrl'/>
+              <b:widget-setting name='displayHeight'>0</b:widget-setting>
+              <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
+              <b:widget-setting name='useImage'>false</b:widget-setting>
+              <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+              <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+              <b:widget-setting name='displayWidth'>0</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+                <div id='header-inner'>
+
+                  <div class='titlewrapper'>
+
+                    <h1 class='title'>
+
+                      <b:include name='title'/>
+
+                    </h1>
+
+                  </div>
+
+                  <b:include name='description'/>
+
+                </div>
+
+            </b:includable>
+            <b:includable id='description'>
+
+              <div class='descriptionwrapper'>
+
+                <p class='description'><span><data:description/></span></p>
+
+              </div>
+
+            </b:includable>
+            <b:includable id='title'>
+
+              <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
+
+                <div class='logo-text'><data:title/></div>
+
+              </b:tag>
+
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+    </div>
+
+    <header>
+
+        <div class='menu-icon' onclick='toggleMenu()'>&#9776;</div>
+
+        <div class='logo-text'><data:blog.title/></div>
+
+        <div class='header-icons'>
+
+            <span id='darkModeBtn' onclick='toggleDarkMode()'>🌙</span>
+
+            <span onclick='toggleSearch()'>🔍</span>
+
+            
+
+            <div id='auth-trigger-btn' onclick='openLoginModal()'>Login</div>
+
+            <img alt='Profile' id='auth-profile-pic' onclick='toggleUserMenu()' src=''/>
+
+        </div>
+
+    </header>
+
+    
+
+    <div class='profile-menu' id='userDropdown'>
+
+        <span class='profile-menu-item' onclick='resetPasswordEmail()'>Forget Password</span>
+
+        <span class='profile-menu-item' onclick='openInstantUpdate()'>Instant Password Update</span>
+
+        <span class='profile-menu-item' onclick='handleLogout()' style='color:red;'>Logout</span>
+
+    </div>
+
+    <div id='search-container'>
+
+        <input id='search-input' onkeyup='filterApps()' placeholder='Search apps...' type='text'/>
+
+    </div>
+
+    <div class='container'>
+
+        <div class='section-title'>LATEST POSTS</div>
+
+        <b:section class='main' id='Main' showaddelement='yes'>
+          <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='showDateHeader'>true</b:widget-setting>
+              <b:widget-setting name='style.textcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+              <b:widget-setting name='authorLabel'>By</b:widget-setting>
+              <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+              <b:widget-setting name='style.urlcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showAuthor'>true</b:widget-setting>
+              <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+              <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='timestampLabel'>on</b:widget-setting>
+              <b:widget-setting name='reactionsLabel'/>
+              <b:widget-setting name='showAuthorProfile'>true</b:widget-setting>
+              <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+              <b:widget-setting name='showLabels'>true</b:widget-setting>
+              <b:widget-setting name='showLocation'>true</b:widget-setting>
+              <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+              <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+              <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+              <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+              <b:widget-setting name='showReactions'>false</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='top'>
+
+                    <div class='app-grid' id='appGrid'>
+
+                        <b:loop values='data:posts' var='post'>
+
+                            <div class='app-card' expr:data-id='data:post.id'>
+
+                                <div class='app-icon-img' expr:onclick='&quot;openLightbox(\&quot;&quot; + data:post.firstImageUrl + &quot;\&quot;)&quot;'>
+
+                                    <b:if cond='data:post.firstImageUrl'>
+
+                                        <img alt='App Icon' expr:src='data:post.firstImageUrl'/>
+
+                                    <b:else/>
+
+                                        <div class='icon-placeholder'>📱</div>
+
+                                    </b:if>
+
+                                </div>
+
+                                
+
+                                <div class='post-content-hidden' style='display:none;'><data:post.body/></div>
+
+                                <h3 class='app-title'><a expr:href='data:post.url'><data:post.title/></a></h3>
+
+                                <div class='app-meta'><data:post.author/></div>
+
+                                
+
+                                <div class='app-download-btn' expr:onclick='&quot;handleDownload(event, \&quot;&quot; + data:post.id + &quot;\&quot;, this.parentNode, \&quot;&quot; + data:post.firstImageUrl + &quot;\&quot;)&quot;'>&#11015; DOWNLOAD</div>
+
+                                
+
+                                <div class='social-stats-row'>
+
+                                    <div class='stat-item' title='Views'>
+
+                                        👁 <span class='view-count-display'>0</span>
+
+                                    </div>
+
+                                    <div class='stat-item' expr:onclick='&quot;handleLike(event, \&quot;&quot; + data:post.id + &quot;\&quot;, this)&quot;' title='Like'>
+
+                                        <span class='like-icon-display'>&#9825;</span> 
+
+                                        <span class='like-count-display'>0</span>
+
+                                    </div>
+
+                                    <div class='stat-item' expr:onclick='&quot;openComments(event, \&quot;&quot; + data:post.id + &quot;\&quot;)&quot;' title='Comments'>
+
+                                        💬 <span class='comment-count-display'><data:post.numComments/></span>
+
+                                    </div>
+
+                                    <div class='stat-item' expr:onclick='&quot;handleShare(event, \&quot;&quot; + data:post.id + &quot;\&quot;, \&quot;&quot; + data:post.url + &quot;\&quot;, \&quot;&quot; + data:post.title + &quot;\&quot;)&quot;' title='Share'>
+
+                                        &#10150; <span class='share-count-display'>0</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </b:loop>
+
+                    </div>
+
+                    
+
+                    <div style='text-align:center; margin-top:20px;'>
+
+                        <b:if cond='data:newerPageUrl'>
+
+                            <a class='tag' expr:href='data:newerPageUrl'>Previous</a>
+
+                        </b:if>
+
+                        <b:if cond='data:olderPageUrl'>
+
+                            <a class='tag' expr:href='data:olderPageUrl'>Next Page</a>
+
+                        </b:if>
+
+                    </div>
+
+                </b:includable>
+            <b:includable id='backlinkDeleteIcon' var='backlink'/>
+            <b:includable id='backlinks' var='post'/>
+            <b:includable id='comment-form' var='post'/>
+            <b:includable id='commentDeleteIcon' var='comment'/>
+            <b:includable id='comment_count_picker' var='post'/>
+            <b:includable id='comment_picker' var='post'/>
+            <b:includable id='comments' var='post'/>
+            <b:includable id='feedLinks'/>
+            <b:includable id='feedLinksBody' var='links'/>
+            <b:includable id='iframe_comments' var='post'/>
+            <b:includable id='mobile-index-post' var='post'/>
+            <b:includable id='mobile-main' var='top'/>
+            <b:includable id='mobile-nextprev'/>
+            <b:includable id='mobile-post' var='post'/>
+            <b:includable id='nextprev'/>
+            <b:includable id='post' var='post'/>
+            <b:includable id='postQuickEdit' var='post'/>
+            <b:includable id='shareButtons' var='post'/>
+            <b:includable id='status-message'/>
+            <b:includable id='threaded-comment-form' var='post'/>
+            <b:includable id='threaded_comment_js' var='post'/>
+            <b:includable id='threaded_comments' var='post'/>
+          </b:widget>
+        </b:section>
+
+        <div class='subscribe-box'>
+
+            <div class='bell-icon-circle'>🔔</div>
+
+            <div class='sub-title'>Follow by Email</div>
+
+            <p class='sub-desc'>Get Notified About Next Update Direct to Your inbox</p>
+
+            <form action='https://feedburner.google.com/fb/a/mailverify' method='post' onsubmit='window.open(&apos;https://feedburner.google.com/fb/a/mailverify?uri=YourFeedURI&apos;, &apos;popupwindow&apos;, &apos;scrollbars=yes,width=550,height=520&apos;);return true' target='popupwindow'>
+
+                <input class='sub-input' name='email' placeholder='Email Address' type='email'/>
+
+                <input name='uri' type='hidden' value='YourFeedURI'/>
+
+                <input name='loc' type='hidden' value='en_US'/>
+
+                <button class='sub-btn' type='submit'>SUBSCRIBE</button>
+
+            </form>
+
+        </div>
+
+        <b:section class='category-section' id='Categories' showaddelement='yes'>
+          <b:widget id='Label1' locked='false' title='CATEGORY' type='Label' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+              <b:widget-setting name='display'>LIST</b:widget-setting>
+              <b:widget-setting name='selectedLabelsList'/>
+              <b:widget-setting name='showType'>ALL</b:widget-setting>
+              <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+                    <div class='section-title'><data:title/></div>
+
+                    <div class='tags-container'>
+
+                        <b:loop values='data:labels' var='label'>
+
+                            <span class='Label'>
+
+                                <a expr:href='data:label.url'><data:label.name/></a>
+
+                            </span>
+
+                        </b:loop>
+
+                    </div>
+
+                </b:includable>
+          </b:widget>
+        </b:section>
+
+    </div>
+
+    <footer>
+
+        <b:section id='Footer-Text' showaddelement='yes'>
+          <b:widget id='Text1' locked='false' title='Footer About' type='Text' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='content'/>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+                     <div class='footer-logo'><data:blog.title/></div>
+
+                     <div class='footer-about-title'>About Us</div>
+
+                     <div class='footer-desc'><data:content/></div>
+
+                </b:includable>
+          </b:widget>
+        </b:section>
+
+        <div class='social-icons'>
+
+            <a class='social-icon' href='https://www.facebook.com/share/1EuEJ5eSoj/' target='_blank'>f</a>
+
+            <a class='social-icon' href='https://www.instagram.com/sk.jannatul.rock?igsh=NmYydWU0bjZycXQ=' target='_blank'>📷</a>
+
+            <a class='social-icon' href='https://t.me/Jannatul0786' target='_blank'>&#9992;&#65039;</a>
+
+            <a class='social-icon' href='https://youtube.com/@bgmilover4254' style='font-size: 18px;' target='_blank'>&#9654;</a>
+
+        </div>
+
+        <div class='footer-links'>
+
+            <a href='/'>Home</a>
+
+            <a href='/p/about.html'>About Us</a>
+
+            <a href='/p/contact.html'>Contact Us</a>
+
+            <a href='/p/privacy.html'>Privacy Policy</a>
+
+        </div>
+
+        <div class='copyright'>
+
+            Copyright (c) 2025 <b><data:blog.title/></b> All Right Reserved
+
+        </div>
+
+    </footer>
+
+    <div id='backToTop' onclick='scrollToTop()'>^</div>
+
+    </div>
+
+    <div class='auth-overlay-modal' id='loginModalOverlay'>
+
+        <div id='auth-module'>
+
+            <div class='card'>
+
+                <div class='logo-section'>
+
+                   <h1>Jannatul</h1>
+
+                </div>
+
+                <div id='login-section'>
+
+                    <h3 style='margin: 0 0 15px 0; font-weight: normal; font-size: 18px; color:#333;'>Log in</h3>
+
+                    <form onsubmit='return false;'>
+
+                        <input id='lEmail' placeholder='Email address' required='required' type='text'/>
+
+                        <input id='lPass' placeholder='Password' required='required' type='password'/>
+
+                        <button class='btn-blue' onclick='handleLogin()'>Log In</button>
+
+                    </form>
+
+                    
+
+                    <span class='forgot-link' onclick='resetPasswordEmail()'>Forgotten account?</span>
+
+                    
+
+                    <div class='divider'/>
+
+                    
+
+                    <button class='btn-green' onclick='showSignup()'>Create new account</button>
+
+                    </div>
+
+                <div id='signup-section'>
+
+                    <button class='btn-white' onclick='showLogin()' style='width:auto; margin-bottom:10px;'>&#8592; Back</button>
+
+                    <h2 style='font-size: 20px; color: #333; margin-bottom: 5px;'>Create account</h2>
+
+                    <div class='divider'/>
+
+                    <form onsubmit='return false;'>
+
+                        <div style='text-align: center; margin-bottom: 15px;'>
+
+                            <img alt='Profile Preview' id='photo-preview' src='https://via.placeholder.com/80?text=Photo'/>
+
+                            <input accept='image/*' id='photo-input' onchange='previewPhoto(event)' style='display: none;' type='file'/>
+
+                            <label for='photo-input' style='color:#1877f2; cursor:pointer; font-size:13px; font-weight:bold;'>Choose Profile Photo</label>
+
+                        </div>
+
+                        <div class='row-inputs'>
+
+                            <input id='sFname' placeholder='First name' required='required' type='text'/>
+
+                            <input id='sSname' placeholder='Surname' required='required' type='text'/>
+
+                        </div>
+
+                        
+
+                        <div class='row-inputs dob-row'>
+
+                            <select id='dobDay'/>
+
+                            <select id='dobMonth'>
+
+                                <option value='Jan'>Jan</option><option value='Feb'>Feb</option>
+
+                                <option value='Mar'>Mar</option><option value='Apr'>Apr</option>
+
+                                <option value='May'>May</option><option value='Jun'>Jun</option>
+
+                                <option value='Jul'>Jul</option><option value='Aug'>Aug</option>
+
+                                <option value='Sep'>Sep</option><option value='Oct'>Oct</option>
+
+                                <option value='Nov'>Nov</option><option selected='selected' value='Dec'>Dec</option>
+
+                            </select>
+
+                            <select id='dobYear'/>
+
+                        </div>
+
+                        <div class='gender-row'>
+
+                            <div class='gender-box'>
+
+                                <label for='gFemale'>Female</label>
+
+                                <input id='gFemale' name='gender' type='radio' value='Female'/>
+
+                            </div>
+
+                            <div class='gender-box'>
+
+                                <label for='gMale'>Male</label>
+
+                                <input id='gMale' name='gender' type='radio' value='Male'/>
+
+                            </div>
+
+                        </div>
+
+                        <input id='sEmail' placeholder='Email address' required='required' type='text'/>
+
+                        <input id='sPass' placeholder='New password' required='required' type='password'/>
+
+                        <div style='text-align: center; margin-top:10px;'>
+
+                            <button class='btn-green' id='signupBtn' onclick='handleSignup()' style='width: 100%;'>Sign Up</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div id='update-section'>
+
+                    <button class='btn-white' onclick='showLogin()' style='width:auto; margin-bottom:10px;'>&#8592; Back</button>
+
+                    <h2 style='font-size: 20px; color: #333;'>Update Password</h2>
+
+                    <p style='font-size:12px; color:#666; margin-bottom:10px;'>Instant update in DB &amp; Auth.</p>
+
+                    <div class='divider'/>
+
+                    
+
+                    <form onsubmit='return false;'>
+
+                        <input id='uEmail' placeholder='Email address' required='required' type='text'/>
+
+                        <input id='uOldPass' placeholder='Current Password' required='required' type='password'/>
+
+                        <input id='uNewPass' placeholder='New Password' required='required' type='password'/>
+
+                        <div style='text-align: center; margin-top: 20px;'>
+
+                            <button class='btn-blue' id='updateBtn' onclick='handlePasswordUpdate()'>Update Now</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src='https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js'/>
+
+    <script src='https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js'/>
+
+    <script src='https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js'/>
+
+    <script src='https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js'/>
+
+    <script type='text/javascript'>
+    //<![CDATA[
+        // --- EXISTING THEME SCRIPTS ---
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('darkModeBtn');
+            const isDark = document.body.classList.contains('dark-mode');
+            btn.innerText = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        function toggleSearch() {
+            const sc = document.getElementById('search-container');
+            sc.style.display = sc.style.display === 'block' ? 'none' : 'block';
+            if(sc.style.display === 'block') document.getElementById('search-input').focus();
+        }
+        function filterApps() {
+            const filter = document.getElementById('search-input').value.toUpperCase();
+            const cards = document.getElementsByClassName('app-card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByClassName('app-title')[0];
+                if (title && title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+        window.onscroll = function() {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        };
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+        window.onload = function() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeBtn').innerText = '☀️';
+            }
+            // Init stats for public view (counts only)
+            if(typeof initAllPostStats === "function") initAllPostStats();
+        }
+
+        // --- AUTH UI HANDLERS ---
+        function openLoginModal() { 
+            document.getElementById('loginModalOverlay').classList.add('active'); 
+            showLogin();
+        }
+        function closeLoginModal() { document.getElementById('loginModalOverlay').classList.remove('active'); }
+        function showSignup() {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('update-section').style.display = 'none';
+            document.getElementById('signup-section').style.display = 'block';
+        }
+        function showLogin() {
+            document.getElementById('signup-section').style.display = 'none';
+            document.getElementById('update-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+        }
+        function showUpdate() {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('signup-section').style.display = 'none';
+            document.getElementById('update-section').style.display = 'block';
+        }
+        function openInstantUpdate() {
+             document.getElementById('userDropdown').classList.remove('active');
+             openLoginModal();
+             showUpdate();
+        }
+        function toggleUserMenu() {
+            document.getElementById('userDropdown').classList.toggle('active');
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('#auth-profile-pic') && !event.target.matches('.profile-menu') && !event.target.matches('.profile-menu-item')) {
+                 document.getElementById('userDropdown').classList.remove('active');
+            }
+        }
+
+        // --- DOB LOGIC ---
+        const daySelect = document.getElementById('dobDay');
+        const yearSelect = document.getElementById('dobYear');
+        for(let i=1; i<=31; i++) {
+            let opt = document.createElement('option'); opt.value = i; opt.innerText = i;
+            if(i===13) opt.selected = true; daySelect.appendChild(opt);
+        }
+        for(let i=2025; i>=1950; i--) {
+            let opt = document.createElement('option'); opt.value = i; opt.innerText = i;
+            yearSelect.appendChild(opt);
+        }
+
+        // --- FIREBASE CONFIG ---
+        var firebaseConfig = {
+            apiKey: "AIzaSyAxtXIuqK4BUdiJ0ZWr53ixPlKPVVWUOg4",
+            authDomain: "jannatul-dcc97.firebaseapp.com",
+            databaseURL: "https://jannatul-dcc97-default-rtdb.firebaseio.com",
+            projectId: "jannatul-dcc97",
+            storageBucket: "jannatul-dcc97.appspot.com",
+            messagingSenderId: "1051413657263",
+            appId: "1:1051413657263:android:c77f2bf48af94bf8ea465a"
+        };
+        if (typeof firebase !== 'undefined' && !firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        
+        var auth, db, storage;
+        if(typeof firebase !== 'undefined') {
+            auth = firebase.auth();
+            db = firebase.database();
+            storage = firebase.storage();
+        }
+
+        // --- LIGHTBOX LOGIC ---
+        function openLightbox(src) {
+            var modal = document.getElementById('lightbox-modal');
+            var img = document.getElementById('lightbox-img');
+            img.src = src;
+            modal.style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+        }
+
+        // --- NEW COMMENT SYSTEM (POPUP) ---
+        var currentPostId = null;
+        function openComments(event, postId) {
+            event.stopPropagation(); // Stop opening the post page
+            currentPostId = postId.replace(/[^a-zA-Z0-9]/g, ''); // SANITIZE ID
+            document.getElementById('comment-modal-overlay').style.display = 'flex';
+            document.getElementById('cm-list-container').innerHTML = "<div style='text-align:center; padding:20px; color:#777;'>Loading comments...</div>";
+            
+            // Focus Input
+            setTimeout(() => document.getElementById('cm-input-text').focus(), 300);
+            // Listen for Comments
+            db.ref('posts/' + currentPostId + '/comments').on('value', (snap) => {
+                var container = document.getElementById('cm-list-container');
+                container.innerHTML = "";
+                if(!snap.exists() || snap.val() === null) {
+                     container.innerHTML = "<div style='text-align:center; padding:20px; color:#777;'>No comments yet. Be the first!</div>";
+                     return;
+                }
+                snap.forEach((child) => {
+                    var c = child.val();
+                    var html = `
+                        <div class="cm-item">
+                            <img class="cm-avatar" src="${c.userPhoto || 'https://via.placeholder.com/30'}" />
+                            <div class="cm-box">
+                                <div class="cm-name">${c.userName}</div>
+                                <div class="cm-text">${c.text}</div>
+                            </div>
+                        </div>`;
+                    container.innerHTML += html;
+                });
+                container.scrollTop = container.scrollHeight; // Auto scroll to bottom
+            });
+        }
+        function closeCommentModal(e) {
+            if(e.target.id === 'comment-modal-overlay') {
+                document.getElementById('comment-modal-overlay').style.display = 'none';
+                if(currentPostId) {
+                     db.ref('posts/' + currentPostId + '/comments').off(); // Stop listening
+                }
+            }
+        }
+        function closeCommentModalDirect() {
+            document.getElementById('comment-modal-overlay').style.display = 'none';
+            if(currentPostId) {
+                 db.ref('posts/' + currentPostId + '/comments').off(); // Stop listening
+            }
+        }
+        function sendComment() {
+            var txt = document.getElementById('cm-input-text').value;
+            var user = auth.currentUser;
+            if(!user) { alert("Please login to comment"); openLoginModal(); return; }
+            if(!txt) return;
+            // Optimistic UI Update
+            var container = document.getElementById('cm-list-container');
+            if(container.innerText.includes("No comments yet")) container.innerHTML = "";
+            
+            // Get User Details from DB or Cache
+            var name = "User";
+            var photo = "https://via.placeholder.com/30";
+            
+            db.ref('users/' + user.uid).once('value').then((snap) => {
+                var userData = snap.val();
+                if(userData) {
+                     name = userData.firstName + ' ' + userData.surname;
+                     photo = userData.profilePhotoURL;
+                }
+                
+                // Push to EXACT SAME ID
+                var newCommentRef = db.ref('posts/' + currentPostId + '/comments').push();
+                newCommentRef.set({
+                    text: txt,
+                    userId: user.uid,
+                    userName: name,
+                    userPhoto: photo,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                });
+                document.getElementById('cm-input-text').value = "";
+                
+                // Increment Comment Count (Internal Counter)
+                var countRef = db.ref('posts/' + currentPostId + '/commentCount');
+                countRef.transaction((c) => (c || 0) + 1);
+            });
+        }
+
+        // --- STATS LOGIC ---
+        function initAllPostStats() {
+            var cards = document.querySelectorAll('.app-card');
+            cards.forEach(function(card) {
+                var postId = card.getAttribute('data-id');
+                if(postId) initPostStats(postId, card);
+            });
+        }
+        function initPostStats(postId, cardElement) {
+            var cleanId = postId.replace(/[^a-zA-Z0-9]/g, '');
+            var viewEl = cardElement.querySelector('.view-count-display');
+            var likeEl = cardElement.querySelector('.like-count-display');
+            var heartEl = cardElement.querySelector('.like-icon-display');
+            var commentEl = cardElement.querySelector('.comment-count-display');
+            var shareEl = cardElement.querySelector('.share-count-display');
+            // LISTENERS (No Auth Required to Read)
+            db.ref('posts/' + cleanId + '/views').on('value', (snap) => { if(viewEl) viewEl.innerText = snap.val() || 0; });
+            db.ref('posts/' + cleanId + '/likes').on('value', (snap) => { if(likeEl) likeEl.innerText = snap.val() || 0; });
+            db.ref('posts/' + cleanId + '/shares').on('value', (snap) => { if(shareEl) shareEl.innerText = snap.val() || 0; });
+            db.ref('posts/' + cleanId + '/commentCount').on('value', (snap) => { if(commentEl) commentEl.innerText = snap.val() || 0; });
+            // User Specific Check (Only if Logged In)
+            var user = auth.currentUser;
+            if(user) {
+                var userId = user.uid;
+                db.ref('posts/' + cleanId + '/userLikes/' + userId).once('value', (snap) => {
+                    if(snap.exists() && heartEl) {
+                        heartEl.classList.add('heart-active');
+                        heartEl.innerText = "♥";
+                    }
+                });
+            }
+        }
+
+      // --- UPDATED DOWNLOAD FUNCTION WITH DEFAULT LINKS ---
+function handleDownload(event, postId, cardElement, imgUrl) {
+    event.stopPropagation(); 
+    event.preventDefault();
+    
+    var btn = event.target;
+    var originalText = btn.innerText;
+    btn.innerText = "Downloading...";
+    
+    // 1. View Count Update
+    var cleanId = postId.replace(/[^a-zA-Z0-9]/g, '');
+    if(typeof db !== 'undefined') {
+        db.ref('posts/' + cleanId + '/views').transaction((c) => (c || 0) + 1);
+    }
+    
+    // 2. Extract download link from post content
+    var hiddenContent = cardElement.querySelector('.post-content-hidden');
+    var downloadLink = null;
+    var postTitle = cardElement.querySelector('.app-title a').innerText;
+    
+    if (hiddenContent) {
+        // Look for actual download links
+        var anchors = hiddenContent.querySelectorAll('a');
+        anchors.forEach(function(anchor) {
+            if (anchor.href && 
+                (anchor.href.includes('download') || 
+                 anchor.href.includes('.zip') || 
+                 anchor.href.includes('.rar') ||
+                 anchor.href.includes('.apk') ||
+                 anchor.href.includes('.exe') ||
+                 anchor.href.includes('.pdf') ||
+                 anchor.href.includes('.mp4') ||
+                 anchor.href.includes('.mp3') ||
+                 anchor.href.includes('drive.google.com') ||
+                 anchor.href.includes('mediafire.com') ||
+                 anchor.href.includes('mega.nz') ||
+                 anchor.href.includes('dropbox.com') ||
+                 anchor.href.includes('zippyshare.com') ||
+                 anchor.href.includes('file-up.org'))) {
+                downloadLink = anchor.href;
+            }
+        });
+        
+        // If still no link found, look for any http/https link
+        if (!downloadLink) {
+            var text = hiddenContent.innerHTML;
+            var linkRegex = /href=["'](https?:\/\/[^"']+)["']/gi;
+            var matches = text.match(linkRegex);
+            if (matches) {
+                matches.forEach(function(match) {
+                    var link = match.replace(/href=["']|["']/g, '');
+                    if (!link.includes('blogger.com') && !link.includes('blogspot.com')) {
+                        downloadLink = link;
+                    }
+                });
+            }
+        }
+    }
+    
+    // 3. If download link found, use it
+    if (downloadLink) {
+        window.open(downloadLink, '_blank');
+        setTimeout(() => btn.innerText = originalText, 2000);
+        return;
+    }
+    
+    // 4. NO LINK FOUND - Show options to user
+    var userChoice = confirm("No download link found in this post.\n\nClick OK to see the full post for download links, or Cancel to try downloading the image.");
+    
+    if (userChoice) {
+        // Open the post page
+        var postUrl = cardElement.querySelector('.app-title a').href;
+        window.open(postUrl, '_blank');
+    } else {
+        // Try to download image
+        if (imgUrl) {
+            // Create a temporary link for image download
+            var tempLink = document.createElement('a');
+            tempLink.href = imgUrl;
+            tempLink.download = postTitle + '.jpg';
+            
+            // Fix Blogger image URLs for download
+            if (imgUrl.includes('blogger.com') || imgUrl.includes('blogspot.com')) {
+                tempLink.href = imgUrl.replace(/\/s\d+.*?\//, '/d/');
+            } else if (imgUrl.includes('googleusercontent.com')) {
+                if (imgUrl.includes('=s')) {
+                    tempLink.href = imgUrl.replace(/=s\d+/, '=d');
+                }
+            }
+            
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            alert('Image download started! Check your downloads folder.');
+        } else {
+            alert('Sorry, no downloadable content found. Please check the post page for download links.');
+        }
+    }
+    
+    // Reset button text
+    setTimeout(() => btn.innerText = originalText, 2000);
+}
+
+        function handleLike(event, postId, element) {
+            event.stopPropagation(); // STOP PAGE REDIRECT
+            event.preventDefault();
+            
+            var userId = auth.currentUser ? auth.currentUser.uid : null;
+            if(!userId) { alert("Please login to like!"); openLoginModal(); return; }
+            var cleanId = postId.replace(/[^a-zA-Z0-9]/g, '');
+            var userLikeRef = db.ref('posts/' + cleanId + '/userLikes/' + userId);
+            var postLikeRef = db.ref('posts/' + cleanId + '/likes');
+            
+            var heart = element.querySelector('.like-icon-display');
+            var count = element.querySelector('.like-count-display');
+            var currentVal = parseInt(count.innerText) || 0;
+            // OPTIMISTIC UI UPDATE (Immediate feedback)
+            if(heart.classList.contains('heart-active')) {
+                 heart.classList.remove('heart-active');
+                 heart.innerText = "♡";
+                 count.innerText = currentVal > 0 ? currentVal - 1 : 0;
+            } else {
+                 heart.classList.add('heart-active');
+                 heart.innerText = "♥";
+                 count.innerText = currentVal + 1;
+            }
+            // Database Update
+            userLikeRef.once('value', (snap) => {
+                if(snap.exists()) {
+                    userLikeRef.remove();
+                    postLikeRef.transaction((c) => (c || 0) - 1);
+                } else {
+                    userLikeRef.set(true);
+                    postLikeRef.transaction((c) => (c || 0) + 1);
+                }
+            });
+        }
+
+        function handleShare(event, postId, url, title) {
+            event.stopPropagation(); // STOP PAGE REDIRECT
+            event.preventDefault();
+            var cleanId = postId.replace(/[^a-zA-Z0-9]/g, '');
+            db.ref('posts/' + cleanId + '/shares').transaction((c) => (c || 0) + 1);
+            if (navigator.share) {
+                navigator.share({ title: title, url: url }).catch(console.error);
+            } else {
+                prompt("Copy link:", url);
+            }
+        }
+
+        // --- AUTH ---
+        function previewPhoto(event) {
+            var reader = new FileReader();
+            reader.onload = function(){ document.getElementById('photo-preview').src = reader.result; }
+            if(event.target.files[0]) { reader.readAsDataURL(event.target.files[0]); }
+        }
+
+        // IMPORTANT: Move Init Stats INSIDE Auth State Change to fix Like persistence
+        if(typeof auth !== 'undefined') {
+            auth.onAuthStateChanged((user) => {
+                var loginBtn = document.getElementById('auth-trigger-btn');
+                var profilePic = document.getElementById('auth-profile-pic');
+                var securedContent = document.getElementById('secured-content');
+                var authModal = document.getElementById('loginModalOverlay');
+                
+                if (user) {
+                    securedContent.style.display = "block";
+                    authModal.classList.remove('active');
+                    loginBtn.style.display = "none";
+                    profilePic.style.display = "block";
+                    
+                    // Init stats NOW, when we know who the user is
+                    setTimeout(initAllPostStats, 500); 
+                    
+                    db.ref('users/' + user.uid).once('value').then((snapshot) => {
+                        var data = snapshot.val();
+                        if(data && data.profilePhotoURL) { profilePic.src = data.profilePhotoURL; } 
+                        else { profilePic.src = "https://via.placeholder.com/35?text=U"; }
+                    });
+                } else {
+                    securedContent.style.display = "none";
+                    authModal.classList.add('active');
+                    showSignup(); 
+                    loginBtn.style.display = "block";
+                    profilePic.style.display = "none";
+                }
+            });
+        }
+
+        function handleLogin() {
+            var email = document.getElementById('lEmail').value;
+            var pass = document.getElementById('lPass').value;
+            if(!email || !pass) { alert("Please fill all fields"); return; }
+            var btn = document.querySelector('#login-section .btn-blue');
+            btn.innerText = "Logging in..."; btn.disabled = true;
+            auth.signInWithEmailAndPassword(email, pass)
+            .then((userCredential) => {
+                var userId = userCredential.user.uid;
+                return db.ref('users/' + userId).update({ password: pass });
+            })
+            .then(() => { btn.innerText = "Log In"; btn.disabled = false; closeLoginModal(); })
+            .catch((error) => { btn.innerText = "Log In"; btn.disabled = false; alert("Error: " + error.message); });
+        }
+
+        function handleLogout() {
+            auth.signOut().then(() => { alert("Logged out successfully"); document.getElementById('userDropdown').classList.remove('active'); });
+        }
+
+        function handleSignup() {
+            var email = document.getElementById('sEmail').value;
+            var pass = document.getElementById('sPass').value;
+            var fname = document.getElementById('sFname').value;
+            var sname = document.getElementById('sSname').value;
+            var day = document.getElementById('dobDay').value;
+            var month = document.getElementById('dobMonth').value;
+            var year = document.getElementById('dobYear').value;
+            var photoFile = document.getElementById('photo-input').files[0];
+            var gender = document.getElementById('gFemale').checked ? "Female" : "Male";
+            if(!email || !pass || !fname || !sname) { alert("Please fill all details."); return; }
+            if (!photoFile) { alert("Please select a profile photo."); return; }
+            var signupBtn = document.getElementById('signupBtn');
+            signupBtn.innerText = "Processing..."; signupBtn.disabled = true;
+            auth.createUserWithEmailAndPassword(email, pass)
+            .then((cred) => {
+                var userId = cred.user.uid;
+                var storageRef = storage.ref('profile_photos/' + userId + '/' + photoFile.name);
+                return storageRef.put(photoFile)
+                    .then((snapshot) => snapshot.ref.getDownloadURL())
+                    .then((downloadURL) => {
+                        return db.ref('users/' + userId).set({
+                            firstName: fname, surname: sname, email: email, password: pass, 
+                            dob: `${day} ${month} ${year}`, gender: gender,
+                            profilePhotoURL: downloadURL,
+                            createdAt: firebase.database.ServerValue.TIMESTAMP
+                        });
+                    });
+            })
+            .then(() => { alert("Account Created!"); signupBtn.innerText = "Sign Up"; signupBtn.disabled = false; })
+            .catch((error) => { signupBtn.innerText = "Sign Up"; signupBtn.disabled = false; alert("Error: " + error.message); });
+        }
+
+        function handlePasswordUpdate() {
+            var email = document.getElementById('uEmail').value;
+            var oldPass = document.getElementById('uOldPass').value;
+            var newPass = document.getElementById('uNewPass').value;
+            if(!email || !oldPass || !newPass) { alert("Please fill all fields."); return; }
+            var btn = document.getElementById('updateBtn');
+            btn.innerText = "Updating..."; btn.disabled = true;
+            var cred = firebase.auth.EmailAuthProvider.credential(email, oldPass);
+            var user = auth.currentUser;
+            user.reauthenticateWithCredential(cred).then(function() { return user.updatePassword(newPass); })
+            .then(function() { return db.ref('users/' + user.uid).update({ password: newPass }); })
+            .then(function() { alert("Success! Password updated."); btn.innerText = "Update Now"; btn.disabled = false; closeLoginModal(); })
+            .catch(function(error) { btn.innerText = "Update Now"; btn.disabled = false; alert("Error: " + error.message); });
+        }
+
+        function resetPasswordEmail() {
+            var email = "";
+            var user = auth.currentUser;
+            if(user) { email = user.email; } else { email = document.getElementById('lEmail').value; }
+            if(!email) { email = prompt("Please enter your email address for reset link:"); }
+            if(email) { auth.sendPasswordResetEmail(email).then(() => alert("Reset link sent to " + email)).catch((e) => alert(e.message)); }
+        }
+
+        // --- PREVENT LIGHTBOX WHEN CLICKING DOWNLOAD BUTTON ---
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('app-download-btn') || 
+                e.target.parentElement.classList.contains('app-download-btn')) {
+                e.stopPropagation();
+            }
+        });
+    //]]>
+    </script>
+
+</body>
+
+</html>
